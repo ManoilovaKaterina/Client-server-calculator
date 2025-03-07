@@ -11,10 +11,13 @@ function App() {
       setResult("");
     } else if (value === "=") {
       try {
-        // Assuming the input is in the form "num1 operation num2"
+        // Розділяємо введення на num1, операцію і num2
         const [num1, operation, num2] = input.split(" ");
         
-        // Prepare the data to send to the server
+        // Перевіряємо, чи правильно розділили дані
+        console.log("Data to send:", { num1, operation, num2 });
+
+        // Відправляємо запит на сервер
         const response = await fetch("http://localhost:5000/calculate", {
           method: "POST",
           headers: {
@@ -27,14 +30,15 @@ function App() {
           }),
         });
 
-        // Parse and set the result from the server response
+        // Перевіряємо відповідь від сервера
         const data = await response.json();
         if (data.result !== undefined) {
           setResult(data.result.toString());
         } else {
           setResult("Error");
         }
-      } catch {
+      } catch (error) {
+        console.error("Error during calculation:", error);
         setResult("Error");
       }
     } else {
@@ -49,10 +53,10 @@ function App() {
         <div className="result">{result}</div>
         <div className="grid">
           {[
-            ["7", "8", "9", "/"],
-            ["4", "5", "6", "*"],
-            ["1", "2", "3", "-"],
-            ["0", "=", "+", "C"],
+            ["7", "8", "9", " / "],
+            ["4", "5", "6", " * "],
+            ["1", "2", "3", " - "],
+            ["0", "=", " + ", "C"],
           ].map((row, rowIndex) => (
             <div key={rowIndex} className="grid-row">
               {row.map((btn) => (

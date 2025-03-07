@@ -10,10 +10,10 @@ app.post("/calculate", (req, res) => {
     let result;
 
     switch (operation) {
-        case "add": result = num1 + num2; break;
-        case "subtract": result = num1 - num2; break;
-        case "multiply": result = num1 * num2; break;
-        case "divide": result = num2 !== 0 ? num1 / num2 : "Error"; break;
+        case "+": result = num1 + num2; break;
+        case "-": result = num1 - num2; break;
+        case "*": result = num1 * num2; break;
+        case "/": result = num2 !== 0 ? num1 / num2 : "Error"; break;
         default: return res.status(400).json({ error: "Invalid operation" });
     }
     res.json({ result });
