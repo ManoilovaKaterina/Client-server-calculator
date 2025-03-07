@@ -18,7 +18,7 @@ function App() {
         console.log("Data to send:", { num1, operation, num2 });
 
         // Відправляємо запит на сервер
-        const response = await fetch("https://client-server-calculator-backend.onrender.com", {
+        const response = await fetch("https://client-server-calculator-backend.onrender.com/calculate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
