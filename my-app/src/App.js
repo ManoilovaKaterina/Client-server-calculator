@@ -43,10 +43,10 @@ function App() {
         <div className="result">{result}</div>
         <div className="grid">
           {[
-            ["7", "8", "9", " / "],
-            ["4", "5", "6", " * "],
-            ["1", "2", "3", " - "],
-            ["0", "=", " + ", "C"],
+            ["7", "8", "9", "/"],
+            ["4", "5", "6", "*"],
+            ["1", "2", "3", "-"],
+            ["0", "=", "+", "C"],
           ].map((row, rowIndex) => (
             <div key={rowIndex} className="grid-row">
               {row.map((btn) => (
