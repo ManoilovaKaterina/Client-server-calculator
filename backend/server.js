@@ -10,7 +10,7 @@ app.post("/calculate", (req, res) => {
 
     try {
         // Перевірка введення
-        if (!'/^[0-9+\-*/().\s]+$/'.test(expression)) {
+        if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
             return res.status(400).json({ error: "Invalid characters in expression" });
         }
 
