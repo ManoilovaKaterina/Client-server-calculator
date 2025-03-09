@@ -11,23 +11,13 @@ function App() {
       setResult("");
     } else if (value === "=") {
       try {
-        // Розділяємо введення на num1, операцію і num2
-        const [num1, operation, num2] = input.split(" ");
-        
-        // Перевіряємо, чи правильно розділили дані
-        console.log("Data to send:", { num1, operation, num2 });
-
         // Відправляємо запит на сервер
         const response = await fetch("https://client-server-calculator-backend.onrender.com/calculate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            num1: parseFloat(num1),
-            num2: parseFloat(num2),
-            operation,
-          }),
+          body: JSON.stringify({ expression: input }),
         });
 
         // Перевіряємо відповідь від сервера

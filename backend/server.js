@@ -6,17 +6,20 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/calculate", (req, res) => {
-    const { num1, num2, operation } = req.body;
-    let result;
+    const { expression } = req.body;
 
-    switch (operation) {
-        case "+": result = num1 + num2; break;
-        case "-": result = num1 - num2; break;
-        case "*": result = num1 * num2; break;
-        case "/": result = num2 !== 0 ? num1 / num2 : "Error"; break;
-        default: return res.status(400).json({ error: "Invalid operation" });
+    try {
+        // Перевірка введення
+        if (!'/^[0-9+\-*/().\s]+$/'.test(expression)) {
+            return res.status(400).json({ error: "Invalid characters in expression" });
+        }
+
+        // Обчислення виразу
+        const result = eval(expression);
+        res.json({ result });
+    } catch (error) {
+        res.status(400).json({ error: "Invalid expression" });
     }
-    res.json({ result });
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
